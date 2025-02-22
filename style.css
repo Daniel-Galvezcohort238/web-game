@@ -1,0 +1,16 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  /* Background image always fits the screen and doesn't move */
+  background: url('images/map-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* The zoomable container for your game content */
+#container {
+  width: 300vw; /* A large area for panning/zooming */
+  height: 300vh;
+  transform-origin: center center;
+  transition: transform 0.1s ease-out;
+}
