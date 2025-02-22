@@ -9,16 +9,19 @@ const maxScale = 2; // Maximum zoom-in scale factor
 const movementSpeed = 20; // Movement speed in pixels per frame
 
 function updateTransform() {
+  // Center container and then apply pan and zoom
   container.style.transform =
     `translate(-50%, -50%) translate(${translateX}px, ${translateY}px) scale(${scale})`;
+  // After applying the transform, perform viewport culling
+  cullBiomes();
 }
 
 document.addEventListener('wheel', (e) => {
   e.preventDefault();
   if (e.deltaY < 0) {
-    scale = Math.min(scale / 0.85, maxScale);
+    scale = Math.min(scale / 0.95, maxScale);
   } else {
-    scale *= 0.85;
+    scale *= 0.95;
   }
   updateTransform();
 });
@@ -37,6 +40,35 @@ function move() {
   requestAnimationFrame(move);
 }
 requestAnimationFrame(move);
+
+/*************************************
+ * Viewport Culling
+ *************************************/
+/*
+  cullBiomes() iterates through each biome canvas (child of #container)
+  and checks if its bounding rectangle (in viewport coordinates) overlaps
+  the visible window. If a canvas is completely outside the viewport,
+  we set its display to "none"; otherwise, we ensure it’s visible.
+*/
+function cullBiomes() {
+  const buffer = 200; // pixels of extra space around the viewport
+  const canvases = container.children;
+  for (let i = 0; i < canvases.length; i++) {
+    const canvas = canvases[i];
+    const rect = canvas.getBoundingClientRect();
+    if (
+      rect.right < -buffer ||
+      rect.left > window.innerWidth + buffer ||
+      rect.bottom < -buffer ||
+      rect.top > window.innerHeight + buffer
+    ) {
+      canvas.style.display = 'none';
+    } else {
+      canvas.style.display = 'block';
+    }
+  }
+}
+
 
 /*************************************
  * Procedural Generation for Forest Biomes (Optimized)
