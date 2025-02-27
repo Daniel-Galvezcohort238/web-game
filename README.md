@@ -1,3 +1,4 @@
-# This is a restart Im going to try to document my progress and problems more thoroughly. This code does not work for me as is. But its going to be the commit that I start from.
+# Prototype 0.02
+I decided to edit folder layout, i dont think i want to have trees and buildings and units work on the same grid as ground textures.
 
-Prototype 0.01
+I am going to group foliage and ground textures by climate, like having grass and these temperate trees and in the temperate climate. Just to save the smallest bit of time, im not going to bother doing that with buildings.
