@@ -1,3 +1,3 @@
 
-# Prototype 0.11
-the ai attempts to fix the grid line issue with overdrawing the sprites over eachother preventing gaps between. which does help for some of the zoom out, but not for much more of it.
+# Prototype 0.12
+the ai attempts to fix the grid line issue by increasing the amount the sprites are drawn over eachother as the player zooms out. And it works flawlessly

@@ -23,43 +23,27 @@ const baseMoveSpeed = 10; // Base movement speed
 
 const keys = {}; // Object to track pressed keys
 
-// // Function to draw the grid
-// function drawGrid() {
-//     ctx.imageSmoothingEnabled = false; // Prevents texture bleeding
-//     ctx.clearRect(0, 0, canvas.width, canvas.height);
-//     ctx.save();
-//     ctx.translate(canvas.width / 2, canvas.height / 2);
-//     ctx.scale(zoom, zoom);
-//     ctx.translate(-canvas.width / 2 + cameraX, -canvas.height / 2 + cameraY);
-
-//     for (let row = 0; row < gridRows; row++) {
-//         for (let col = 0; col < gridCols; col++) {
-//             ctx.drawImage(grassImg, col * tileSize, row * tileSize, tileSize, tileSize);
-//         }
-//     }
-
-//     ctx.restore();
-// }
-
 // Function to draw the grid
 function drawGrid() {
-  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.save();
   ctx.translate(canvas.width / 2, canvas.height / 2);
   ctx.scale(zoom, zoom);
   ctx.translate(-canvas.width / 2 + cameraX, -canvas.height / 2 + cameraY);
 
+  let overdraw = Math.max(0.5, 1.5 / zoom); // Increase overdraw as zoom decreases
+
   for (let row = 0; row < gridRows; row++) {
       for (let col = 0; col < gridCols; col++) {
-          let x = Math.floor(col * tileSize - 0.5); // Slight overdraw
-          let y = Math.floor(row * tileSize - 0.5);
-          ctx.drawImage(grassImg, x, y, tileSize + 1, tileSize + 1); // Overdraw by 1px
+          let x = Math.floor(col * tileSize - overdraw);
+          let y = Math.floor(row * tileSize - overdraw);
+          ctx.drawImage(grassImg, x, y, tileSize + overdraw * 2, tileSize + overdraw * 2);
       }
   }
 
   ctx.restore();
 }
+
 
 
 canvas.addEventListener("wheel", (event) => {
