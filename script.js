@@ -19,7 +19,7 @@ let cameraX = 0;
 let cameraY = 0;
 let zoom = 1;
 const zoomSpeed = 0.1;
-const moveSpeed = 5;
+const baseMoveSpeed = 10; // Base movement speed
 const keys = {}; // Object to track pressed keys
 
 // Function to draw the grid
@@ -61,6 +61,8 @@ document.addEventListener("keyup", (event) => {
 
 // Update function for smooth movement
 function updateCamera() {
+  const moveSpeed = baseMoveSpeed / zoom; // Adjust speed dynamically
+
   if (keys["ArrowUp"] || keys["w"]) cameraY += moveSpeed;
   if (keys["ArrowDown"] || keys["s"]) cameraY -= moveSpeed;
   if (keys["ArrowLeft"] || keys["a"]) cameraX += moveSpeed;
