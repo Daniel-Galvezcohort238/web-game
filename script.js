@@ -19,7 +19,8 @@ let cameraX = 0;
 let cameraY = 0;
 let zoom = 1;
 const zoomSpeed = 0.1;
-const baseMoveSpeed = 10; // Base movement speed
+const baseMoveSpeed = 20; // Base movement speed
+
 const keys = {}; // Object to track pressed keys
 
 // Function to draw the grid
@@ -42,9 +43,9 @@ function drawGrid() {
 // Event listeners for zoom
 canvas.addEventListener("wheel", (event) => {
     if (event.deltaY < 0) {
-        zoom += zoomSpeed;
+        zoom *= 1.1; // Increase zoom smoothly
     } else if (event.deltaY > 0) {
-        zoom -= zoomSpeed;
+        zoom /= 1.1; // Decrease zoom smoothly
     }
     zoom = Math.max(0.5, Math.min(2, zoom)); // Clamp zoom between 0.5x and 2x
     drawGrid();
@@ -61,7 +62,7 @@ document.addEventListener("keyup", (event) => {
 
 // Update function for smooth movement
 function updateCamera() {
-  const moveSpeed = baseMoveSpeed / zoom; // Adjust speed dynamically
+  const moveSpeed = baseMoveSpeed * Math.pow(zoom, -0.8); // Exponential scaling
 
   if (keys["ArrowUp"] || keys["w"]) cameraY += moveSpeed;
   if (keys["ArrowDown"] || keys["s"]) cameraY -= moveSpeed;
