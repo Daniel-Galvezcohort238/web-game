@@ -40,16 +40,16 @@ function drawGrid() {
     ctx.restore();
 }
 
-// Event listeners for zoom
 canvas.addEventListener("wheel", (event) => {
-    if (event.deltaY < 0) {
-        zoom *= 1.1; // Increase zoom smoothly
-    } else if (event.deltaY > 0) {
-        zoom /= 1.1; // Decrease zoom smoothly
-    }
-    zoom = Math.max(0.5, Math.min(2, zoom)); // Clamp zoom between 0.5x and 2x
-    drawGrid();
+  if (event.deltaY < 0) {
+      zoom *= 1.1; // Zoom in
+  } else if (event.deltaY > 0) {
+      zoom /= 1.1; // Zoom out
+  }
+  zoom = Math.max(0.1, zoom); // Lower limit (prevents zooming too far in)
+  drawGrid();
 });
+
 
 // Event listeners for keyboard movement
 document.addEventListener("keydown", (event) => keys[event.key] = true);
