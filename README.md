@@ -1,4 +1,3 @@
 
-# Prototype 0.03
-I fixed the MIME type error. quick explanation: MIME type refers to a file type, the browser was expecting a css file, but could not find one and resorted to the html file which threw an error for the browser's strict MIME type matching. The browser could not find one because I had a typo in the reference to the css file, or rather I had a typo in the css file's name, i changed the name to styles to match the reference i had down and what the ai agent im working with thinks its called.
-
+# Prototype 0.04
+I fixed the grass not rendering. it had to do with a typo in the js file my ai agent gave me in line 8, instead of "ground textures" I needed to refer to "ground-textures". because of the hyphen convention I decided the convention over letting my ai agent get away with this one. Although last patch the ai agent was with the convention and I was not... so.. anyway here it is.

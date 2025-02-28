@@ -7,7 +7,7 @@ canvas.height = window.innerHeight;
 
 // Load the grass sprite
 const grassImg = new Image();
-grassImg.src = "images/temperate/ground textures/grass.jpg";; // Adjust the path as needed
+grassImg.src = "images/temperate/ground-textures/grass.jpg";; // Adjust the path as needed
 
 // Grid settings
 const tileSize = 100;
