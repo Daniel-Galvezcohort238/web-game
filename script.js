@@ -19,7 +19,7 @@ let cameraX = 0;
 let cameraY = 0;
 let zoom = 1;
 const zoomSpeed = 0.1;
-const baseMoveSpeed = 20; // Base movement speed
+const baseMoveSpeed = 10; // Base movement speed
 
 const keys = {}; // Object to track pressed keys
 
@@ -51,14 +51,14 @@ canvas.addEventListener("wheel", (event) => {
     drawGrid();
 });
 
-// Event listeners for movement
-document.addEventListener("keydown", (event) => {
-  keys[event.key] = true;
-});
+// Event listeners for keyboard movement
+document.addEventListener("keydown", (event) => keys[event.key] = true);
+document.addEventListener("keyup", (event) => keys[event.key] = false);
 
-document.addEventListener("keyup", (event) => {
-  keys[event.key] = false;
-});
+
+
+// Prevent right-click menu from opening in the game
+canvas.addEventListener("contextmenu", (event) => event.preventDefault());
 
 // Update function for smooth movement
 function updateCamera() {
