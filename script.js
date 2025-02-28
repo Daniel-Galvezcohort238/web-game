@@ -54,19 +54,19 @@ document.addEventListener("keydown", (event) => {
     switch (event.key) {
         case "ArrowUp":
         case "w":
-            cameraY -= moveSpeed;
+            cameraY += moveSpeed;
             break;
         case "ArrowDown":
         case "s":
-            cameraY += moveSpeed;
+            cameraY -= moveSpeed;
             break;
         case "ArrowLeft":
         case "a":
-            cameraX -= moveSpeed;
+            cameraX += moveSpeed;
             break;
         case "ArrowRight":
         case "d":
-            cameraX += moveSpeed;
+            cameraX -= moveSpeed;
             break;
     }
     drawGrid();
