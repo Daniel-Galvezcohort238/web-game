@@ -46,7 +46,8 @@ canvas.addEventListener("wheel", (event) => {
   } else if (event.deltaY > 0) {
       zoom /= 1.1; // Zoom out
   }
-  zoom = Math.max(0.1, zoom); // Lower limit (prevents zooming too far in)
+    // ✅ Enforce only a lower limit, no upper limit
+    if (zoom > 10) zoom = 10;
   drawGrid();
 });
 
@@ -62,7 +63,7 @@ canvas.addEventListener("contextmenu", (event) => event.preventDefault());
 
 // Update function for smooth movement
 function updateCamera() {
-  const moveSpeed = baseMoveSpeed * Math.pow(zoom, -0.8); // Exponential scaling
+  const moveSpeed = baseMoveSpeed * Math.pow(zoom, -0.9); // Exponential scaling
 
   if (keys["ArrowUp"] || keys["w"]) cameraY += moveSpeed;
   if (keys["ArrowDown"] || keys["s"]) cameraY -= moveSpeed;
