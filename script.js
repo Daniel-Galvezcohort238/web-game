@@ -19,7 +19,8 @@ let cameraX = 0;
 let cameraY = 0;
 let zoom = 1;
 const zoomSpeed = 0.1;
-const moveSpeed = 20;
+const moveSpeed = 5;
+const keys = {}; // Object to track pressed keys
 
 // Function to draw the grid
 function drawGrid() {
@@ -49,28 +50,32 @@ canvas.addEventListener("wheel", (event) => {
     drawGrid();
 });
 
-// Keyboard controls for panning
+// Event listeners for movement
 document.addEventListener("keydown", (event) => {
-    switch (event.key) {
-        case "ArrowUp":
-        case "w":
-            cameraY += moveSpeed;
-            break;
-        case "ArrowDown":
-        case "s":
-            cameraY -= moveSpeed;
-            break;
-        case "ArrowLeft":
-        case "a":
-            cameraX += moveSpeed;
-            break;
-        case "ArrowRight":
-        case "d":
-            cameraX -= moveSpeed;
-            break;
-    }
-    drawGrid();
+  keys[event.key] = true;
 });
+
+document.addEventListener("keyup", (event) => {
+  keys[event.key] = false;
+});
+
+// Update function for smooth movement
+function updateCamera() {
+  if (keys["ArrowUp"] || keys["w"]) cameraY += moveSpeed;
+  if (keys["ArrowDown"] || keys["s"]) cameraY -= moveSpeed;
+  if (keys["ArrowLeft"] || keys["a"]) cameraX += moveSpeed;
+  if (keys["ArrowRight"] || keys["d"]) cameraX -= moveSpeed;
+
+  drawGrid(); // Redraw canvas with updated camera position
+}
+
+// Smooth loop (runs 60 times per second)
+function gameLoop() {
+  updateCamera();
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop(); // Start the loop
 
 // Mouse drag controls
 let isDragging = false;
